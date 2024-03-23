@@ -53,7 +53,7 @@ const parseRest = (rest: any[], type: keyof typeof applyStyles) => {
   }
 };
 
-function applyFunction(...args: [keyof typeof applyStyles, ...rest: any]) {
+function applyFunction(...args: [type: keyof typeof applyStyles, ...rest: any]) {
   const [type, namespace, ...rest] = args;
   const formats = parseRest(rest, type);
   console.log(
