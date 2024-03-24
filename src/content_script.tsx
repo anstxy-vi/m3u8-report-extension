@@ -40,5 +40,31 @@ chrome.runtime.onMessage.addListener(function (msg, sender, sendResponse) {
     }
   }
 
+  if (msg.type === "CheckMediaType") {
+    const iframe = document.getElementById("cciframe")
+    if (iframe as HTMLIFrameElement) {
+      const doc = (iframe as HTMLIFrameElement).contentWindow?.document;
+      const player = doc?.getElementById("player")
+      if (player) {
+        const ife = (player as HTMLDivElement).getElementsByTagName("iframe")
+        if (ife.length && ife[0]) {
+          const d = (ife[0] as HTMLIFrameElement).contentWindow?.document
+          const a1 = d?.getElementById("a1")
+          const video = a1?.getElementsByTagName("video")?.[0]
+          if (video) {
+            sendResponse(video.src)
+            return;
+          }
+        }
+        
+        const video = player.getElementsByTagName("video")?.[0]
+        if (video) {
+          sendResponse(video.src)
+          return;
+        }
+      }
+    }
+  }
+
   sendResponse(msg.type);
 });

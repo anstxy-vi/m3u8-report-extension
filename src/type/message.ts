@@ -35,3 +35,5 @@ export type Episode = {
 }
 
 export type FrontendEpisode = Pick<Episode, 'title'> & {href: string}
+
+export type EpisodeUrlType = "mp4" | "m3u8"

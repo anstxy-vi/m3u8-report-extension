@@ -1,4 +1,5 @@
 import { logger } from "./helper/logger";
+import { TabEpisodeManager } from "./helper/tab-episode-manager";
 import { TabListener } from "./helper/tab-listener";
 import { Task } from "./task/task";
 import { Config } from "./type/message";
@@ -7,17 +8,19 @@ const debug = logger("worker");
 
 const config: Config = {
   url: "https://www.mandaom.com",
-  keyword: "妄想学生会第二季",
+  // keyword: "GrandBlue",
+  keyword: "来玩游戏吧",
 };
 
 class Worker {
   protected static instance: null | Worker = null;
 
   public tabListener: TabListener | null = null;
+  public tabEpisodeManager = new TabEpisodeManager()
 
   public config = config;
 
-  constructor() {}
+  constructor() { }
 
   async start() {
     debug.info("worker start");
